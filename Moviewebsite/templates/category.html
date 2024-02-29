@@ -1,0 +1,117 @@
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport"
+              content="width=device-width,initial-scale=1.0" />
+              <script src="https://kit.fontawesome.com/5845bc1bb6.js" crossorigin="anonymous"></script>
+              <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@600&display=swap" rel="stylesheet" />
+              <link href="{% static 'style.css' %}" rel="stylesheet">
+              <link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %}">
+              <script src="{% static 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' %}"></script>
+              <script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js' %}"></script>
+              <script src="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' %}"></script>
+        <style>
+            * {
+                 margin: 0px;
+                padding: 0px;
+            }
+            body {
+                background-image: url(/static/images/im.jpeg);
+                background-size: cover;
+            }
+            h1 {
+                border-bottom: 3px solid black;
+                margin-bottom: 10px;
+                color: black;
+                font-weight: bold;
+                background: none;
+                margin-right: 105px;
+                margin-top: 50px;
+                font-family: "Baloo Bhai 2", cursive;
+            }
+            <h1>Registration Form</h1>
+            h1{
+                text-align: center;
+                margin-top: 0;
+                margin-bottom: 50px;
+                color :white;
+            }
+            .container {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+            .row1 {
+                 position: absolute;
+                 right: 20%;
+            }
+            .row {
+                position: relative;
+            }
+            .row input {
+                position: relative;
+                left: 25px;
+                margin: 10px;
+                padding: 10px;
+                width: 80%;
+                outline: none;
+                background: none;
+                border: 0px;
+                font-weight: bold;
+                border-bottom: white;
+                /*font-family: "Baloo Bhai 2", cursive;*/
+            }
+            .row i {
+                position: absolute;
+                margin-top: 10px;
+                padding: 10px;
+            }
+            .btn {
+                width: 5rem;
+                border-radius: 20px;
+                background: none;
+                margin-right: 105px;
+                background-color: black;
+                align:center;
+                color: blanchedalmond;
+                outline: none;
+                /*font-family: "Baloo Bhai 2", cursive;
+                cursor: pointer;*/
+            }
+            .btn:hover {
+                background-color: blue;
+                color: white;
+            }
+        </style>
+        <title>Movies</title>
+    </head>
+<body>
+<h1>All movies</h1>
+<div class="shadow card">
+                <div class="card-body">
+                    {% for i in movies_list %}
+                    <div class="col-md-6">
+            <img src="{{i.poster.url}}" width="100" height="100">
+            </div>
+                    <h2 class="card-title">{{i.movie_title}}</h2>
+                    <p>{{i.description}}</p>
+                    <p>{{i.release_date}}</p>
+                    <p>{{i.actors}}</p>
+                    <p>{{i.category}}</p>
+                    <a href={{i.YouTube_trailer_link}} target="_blank">{{i.YouTube_trailer_link}}</a><br>
+                    <a class="btn btn-sm btn-warning" href="{% url 'update' i.id %}" style="text-decoration:none">Update</a>
+                    <a href="{% url 'delete' i.id %}" onclick="return confirm('Are you sure you want to delete this movie?')" style="text-decoration: none">
+                        <button type="submit" class="btn btn-sm btn-danger ">
+                            <i class="ti-trash btn-icon-prepend"></i>
+                            Delete
+                        </button>
+                    </a>
+                    {% endfor %}
+            </div>
+</div>
+</body>
+</html>
